@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{ background:#0A0F1E; -webkit-font-smoothing:antialiased; }
+  img{ max-width:100%; display:block; }
+  ::selection{ background:rgba(63,155,232,.3); color:#fff; }
+  @keyframes blink{ 0%,48%{opacity:1} 50%,98%{opacity:0} 100%{opacity:1} }
+  @keyframes floatorb{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(20px,-26px); } }
+  @keyframes pulsedot{ 0%{ box-shadow:0 0 0 0 rgba(43,185,138,.5);} 70%{ box-shadow:0 0 0 9px rgba(43,185,138,0);} 100%{ box-shadow:0 0 0 0 rgba(43,185,138,0);} }
+  @keyframes flowx{ 0%{ background-position:0% 50%; } 100%{ background-position:200% 50%; } }
+  @keyframes panx{ 0%{ transform:scale(1.08) translateX(-3%); } 100%{ transform:scale(1.08) translateX(3%); } }
+  @keyframes sweep{ 0%{ transform:translateX(-130%) skewX(-14deg); } 60%,100%{ transform:translateX(230%) skewX(-14deg); } }
+  @keyframes heroIn{ from{ opacity:0; filter:blur(8px); transform:translateY(16px); } to{ opacity:1; filter:blur(0); transform:none; } }
+  @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } [data-flowimg]{ animation:none !important; } [data-sweep]{ display:none !important; } [data-hero-in]{ animation:none !important; opacity:1 !important; filter:none !important; transform:none !important; } }
+  @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+</style>
+</helmet>
+
+<div data-screen-label="SIRIS Landing" style="background:#0A0F1E; color:#E7EDF9; font-family:'Hanken Grotesk',system-ui,sans-serif; line-height:1.6; overflow-x:hidden;">
+
+  <div ref="{{ progRef }}" style="position:fixed; top:0; left:0; height:2px; width:0; z-index:99; background:linear-gradient(90deg,#5FC0FF,#2BB98A);"></div>
+
+  <!-- ============ NAV ============ -->
+  <nav style="position:sticky; top:0; z-index:60; backdrop-filter:blur(16px) saturate(140%); background:rgba(10,15,30,.6); border-bottom:1px solid rgba(255,255,255,.07);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px; height:70px; display:flex; align-items:center; justify-content:space-between;">
+      <a href="#top" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <svg viewBox="0 0 120 80" width="34" height="23" style="display:block;"><defs><linearGradient id="navlogo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5FC0FF"/><stop offset="1" stop-color="#2BB98A"/></linearGradient></defs><path d="M16 64 a44 44 0 0 1 88 0" fill="none" stroke="url(#navlogo)" stroke-width="9" stroke-linecap="round"/><path d="M34 64 a26 26 0 0 1 52 0" fill="none" stroke="#5FC0FF" stroke-width="8" stroke-linecap="round" opacity=".45"/><circle cx="60" cy="64" r="8" fill="#2BB98A"/></svg>
+        <span style="display:flex; align-items:center;"><span style="font-family:'JetBrains Mono',monospace; font-weight:600; font-size:21px; color:#fff; line-height:1;">siris</span><span style="width:7px; height:17px; background:#2BB98A; margin-left:4px; border-radius:1px; animation:blink 1.1s steps(1) infinite;"></span></span>
+      </a>
+      <div style="display:flex; gap:30px; font-family:'Hanken Grotesk'; font-weight:500; font-size:14.5px; color:#93A2C2;">
+        <a href="#sobre" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">O que é</a>
+        <a href="#como" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Como funciona</a>
+        <a href="#ia" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">IA</a>
+        <a href="#seguranca" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Segurança</a>
+        <a href="#angola" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Angola</a>
+      </div>
+      <a href="#sobre" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#0A0F1E; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:10px 18px; border-radius:10px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-2px); box-shadow:0 12px 28px rgba(43,185,138,.35);">Conhecer →</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header id="top" style="position:relative; min-height:96vh; display:flex; align-items:center; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:#0A0F1E;"></div>
+    <img data-hero-img src="images/01-hero.jpg" alt="Escudo de luz a proteger Luanda ao amanhecer" onerror="{{ onImgError }}" style="position:absolute; top:-6%; left:0; right:0; width:100%; height:112%; object-fit:cover; object-position:right center; opacity:.92; will-change:transform;"/>
+    <div style="position:absolute; inset:0; background:linear-gradient(90deg,#0A0F1E 4%,rgba(10,15,30,.88) 40%,rgba(10,15,30,.42) 64%,rgba(10,15,30,.12) 84%),linear-gradient(0deg,#0A0F1E,rgba(10,15,30,0) 42%);"></div>
+    <div style="position:absolute; width:440px; height:440px; border-radius:50%; filter:blur(80px); opacity:.32; background:radial-gradient(circle,#1769A6,transparent 65%); top:-60px; left:-40px; animation:floatorb 18s ease-in-out infinite;"></div>
+    <div style="position:absolute; width:320px; height:320px; border-radius:50%; filter:blur(80px); opacity:.28; background:radial-gradient(circle,#1FA679,transparent 65%); bottom:-60px; left:34%; animation:floatorb 22s ease-in-out infinite;"></div>
+
+    <canvas data-hero-canvas style="position:absolute; inset:0; width:100%; height:100%; z-index:2; pointer-events:none;"></canvas>
+    <div style="position:relative; z-index:3; max-width:1200px; margin:0 auto; padding:0 32px; width:100%;">
+      <div style="max-width:680px;">
+        <div data-hero-in style="display:inline-flex; align-items:center; gap:9px; padding:7px 14px; border:1px solid rgba(255,255,255,.10); border-radius:999px; background:rgba(255,255,255,.04); font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.06em; color:#93A2C2; margin-bottom:24px;"><span style="width:8px; height:8px; border-radius:50%; background:#2BB98A; animation:pulsedot 2s infinite;"></span>Plataforma de seguros · Angola</div>
+        <h1 data-hero-in style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,7vw,74px); line-height:1.02; letter-spacing:-.03em; color:#fff;">O futuro do seguro é<br><span style="background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">inteligente e soberano</span>.</h1>
+        <p data-hero-in style="margin-top:24px; font-size:clamp(17px,2.2vw,21px); color:#C2CEE6; max-width:52ch;">Motor de regras, agentes de inteligência artificial e dados em Angola — numa só plataforma, construída para escalar.</p>
+        <div data-hero-in style="margin-top:34px; display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#sobre" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; color:#0A0F1E; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:15px 26px; border-radius:12px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-2px); box-shadow:0 16px 36px rgba(43,185,138,.4);">Descobrir o SIRIS</a>
+          <a href="#como" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; color:#fff; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); padding:15px 26px; border-radius:12px; text-decoration:none; transition:background .2s ease, border-color .2s ease;" style-hover="background:rgba(255,255,255,.1); border-color:rgba(95,192,255,.4);">Como funciona</a>
+        </div>
+        <div data-hero-in style="display:flex; gap:0; margin-top:50px; flex-wrap:wrap; row-gap:24px;">
+          <div style="padding-right:30px;"><div data-count="18" style="font-family:'Space Grotesk'; font-weight:700; font-size:36px; line-height:1; background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">0</div><div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#8595B6; margin-top:9px; letter-spacing:.04em;">Províncias cobertas</div></div>
+          <div style="padding:0 30px; border-left:1px solid rgba(255,255,255,.13);"><div data-count="6" style="font-family:'Space Grotesk'; font-weight:700; font-size:36px; line-height:1; background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">0</div><div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#8595B6; margin-top:9px; letter-spacing:.04em;">Ramos &amp; módulos</div></div>
+          <div style="padding:0 30px; border-left:1px solid rgba(255,255,255,.13);"><div style="display:flex; align-items:baseline; gap:2px;"><div data-count="99.9" data-dec="1" style="font-family:'Space Grotesk'; font-weight:700; font-size:36px; line-height:1; background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">0</div><span style="font-family:'Space Grotesk'; font-weight:700; font-size:20px; color:#5FC0FF; line-height:1;">%</span></div><div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#8595B6; margin-top:9px; letter-spacing:.04em;">Disponibilidade alvo</div></div>
+          <div style="padding:0 30px; border-left:1px solid rgba(255,255,255,.13);"><div style="display:flex; align-items:baseline; gap:3px;"><div style="font-family:'Space Grotesk'; font-weight:700; font-size:36px; line-height:1; background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">&lt;1</div><span style="font-family:'Space Grotesk'; font-weight:700; font-size:20px; color:#5FC0FF; line-height:1;">ms</span></div><div style="font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#8595B6; margin-top:9px; letter-spacing:.04em;">Latência das regras</div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SOBRE ============ -->
+  <section id="sobre" style="padding:120px 0; position:relative; background:radial-gradient(900px 420px at 80% 8%, rgba(23,105,166,.10), transparent 70%);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:18px;">O que é o SIRIS</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Um núcleo inteligente para toda a operação</h2>
+        <p style="font-size:18px; color:#93A2C2; max-width:56ch; margin-top:18px;">Do primeiro orçamento ao pagamento de um sinistro, o SIRIS coordena cotação, apólices, sinistros, faturação e comissões. As regras de negócio vivem fora do código, prontas a evoluir ao ritmo do mercado.</p>
+        <div style="margin-top:24px; display:flex; flex-direction:column; gap:13px;">
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cotação e subscrição automáticas, com decisões transparentes.</span></div>
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Ciclo de vida completo da apólice e do sinistro.</span></div>
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Multi-mercado: começa em Angola, expande sem reescrever.</span></div>
+        </div>
+      </div>
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1) .1s,transform .7s cubic-bezier(.2,.7,.2,1) .1s; position:relative; border-radius:20px; overflow:hidden; aspect-ratio:16/11; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+        <img src="images/03-nucleo-digital.jpg" alt="Núcleo digital do sistema" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section id="como" style="padding:30px 0 120px; position:relative; background:radial-gradient(1000px 460px at 50% 0%, rgba(23,105,166,.09), transparent 70%);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); text-align:center; max-width:720px; margin:0 auto;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:18px;">Como funciona</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Da informação à decisão, em <span style="background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">segundos</span></h2>
+        <p style="font-size:18px; color:#93A2C2; margin:16px auto 0; max-width:60ch;">Dados que fluem por etapas claras, cada uma auditável e explicável, até uma decisão consistente em todos os canais.</p>
+      </div>
+      <div data-tiltgroup style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:48px;">
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1); background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">01</div>
+          <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Recolha</h3>
+          <p style="font-size:14px; color:#8595B6; margin-top:6px;">Portal, app ou backoffice submetem os dados.</p>
+        </div>
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1) .08s,transform .6s cubic-bezier(.2,.7,.2,1) .08s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">02</div>
+          <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Avaliação</h3>
+          <p style="font-size:14px; color:#8595B6; margin-top:6px;">O motor de regras analisa risco, elegibilidade e tarifa.</p>
+        </div>
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1) .16s,transform .6s cubic-bezier(.2,.7,.2,1) .16s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">03</div>
+          <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Decisão</h3>
+          <p style="font-size:14px; color:#8595B6; margin-top:6px;">Aprovar, agravar ou rever — com o motivo registado.</p>
+        </div>
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1) .24s,transform .6s cubic-bezier(.2,.7,.2,1) .24s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">04</div>
+          <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Ação</h3>
+          <p style="font-size:14px; color:#8595B6; margin-top:6px;">Emissão, cobrança ou sinistro, com notificação imediata.</p>
+        </div>
+      </div>
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); position:relative; border-radius:20px; overflow:hidden; aspect-ratio:21/7; border:1px solid rgba(255,255,255,.10); margin-top:18px; background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+        <img data-flowimg src="images/10-como-funciona.jpg" alt="Fluxo de dados do sistema" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05); animation:panx 18s ease-in-out infinite alternate;"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+        <div data-sweep style="position:absolute; top:0; bottom:0; left:0; width:34%; pointer-events:none; background:linear-gradient(100deg,transparent,rgba(120,225,200,.22),rgba(150,210,255,.10),transparent); mix-blend-mode:screen; animation:sweep 6.5s ease-in-out infinite;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOTOR DE REGRAS ============ -->
+  <section style="padding:30px 0 120px;">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1) .1s,transform .7s cubic-bezier(.2,.7,.2,1) .1s; order:2; position:relative; border-radius:20px; overflow:hidden; aspect-ratio:16/11; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+        <img src="images/04-motor-regras.jpg" alt="Motor de regras" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+      </div>
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:18px;">Motor de regras</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">As regras de negócio <span style="background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">fora do código</span></h2>
+        <p style="font-size:18px; color:#93A2C2; max-width:56ch; margin-top:18px;">Tarifas, fatores de risco e critérios de aceitação em tabelas de decisão que a equipa e o atuariado ajustam — sem esperar por um novo lançamento. Cada decisão fica registada para auditoria.</p>
+        <div style="margin-top:24px; display:flex; flex-direction:column; gap:13px;">
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Alterações de tarifa sem redeploy.</span></div>
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Mesma regra em todos os canais.</span></div>
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Histórico e rasto de cada decisão.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:1px; max-width:900px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(95,192,255,.15),rgba(95,192,255,.6),rgba(43,185,138,.6),rgba(43,185,138,.15),transparent); background-size:200% 100%; animation:flowx 5s linear infinite;"></div>
+
+  <!-- ============ IA ============ -->
+  <section id="ia" style="padding:120px 0; position:relative; background:radial-gradient(900px 480px at 10% 6%, rgba(31,166,121,.12), transparent 68%);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); max-width:760px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#2BB98A; text-transform:uppercase; margin-bottom:18px;">Inteligência artificial</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Agentes que colaboram — com <span style="background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">governança e supervisão humana</span></h2>
+        <p style="font-size:18px; color:#93A2C2; margin-top:18px; max-width:64ch;">Agentes especializados em atendimento, subscrição, sinistros e fraude. Um agente de governança coordena a colaboração entre eles, aplica regras de segurança e mantém a pessoa no controlo das decisões sensíveis.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:1.25fr 1fr; gap:20px; margin-top:44px;">
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); position:relative; border-radius:20px; overflow:hidden; min-height:320px; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+          <img src="images/05-ia-agentes.jpg" alt="Agentes de IA coordenados" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+        </div>
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1) .1s,transform .7s cubic-bezier(.2,.7,.2,1) .1s; position:relative; border-radius:20px; overflow:hidden; min-height:320px; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+          <img src="images/05b-ia-chatbot.jpg" alt="Assistente conversacional" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+        </div>
+      </div>
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1); margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">Governança entre agentes (A2A)</span>
+        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">AI safety &amp; guardrails</span>
+        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">Human-in-the-loop</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEGURANÇA ============ -->
+  <section id="seguranca" style="padding:30px 0 120px; position:relative; background:radial-gradient(900px 440px at 82% 12%, rgba(23,105,166,.10), transparent 70%);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:18px;">Segurança e soberania</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Os dados ficam em <span style="background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">Angola</span></h2>
+        <p style="font-size:18px; color:#93A2C2; max-width:56ch; margin-top:18px;">Desenhado para correr na infraestrutura da seguradora, com cifragem, autenticação forte e rasto de auditoria. Soberania e conformidade desde o primeiro dia.</p>
+        <div style="margin-top:24px; display:flex; flex-direction:column; gap:13px;">
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cifragem em trânsito e em repouso.</span></div>
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Autenticação única (SSO) e perfis de acesso.</span></div>
+          <div style="display:flex; gap:13px; align-items:flex-start; font-size:15.5px; color:#C2CEE6;"><span style="width:21px; height:21px; flex:none; margin-top:2px; border-radius:50%; border:1px solid rgba(95,192,255,.45); display:flex; align-items:center; justify-content:center;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2.5 6.3 L5 8.6 L9.5 3.6" stroke="#5FC0FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Alta disponibilidade e recuperação de desastres.</span></div>
+        </div>
+      </div>
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1) .1s,transform .7s cubic-bezier(.2,.7,.2,1) .1s; position:relative; border-radius:20px; overflow:hidden; aspect-ratio:16/11; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+        <img src="images/06-seguranca-dados.jpg" alt="Soberania de dados" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANGOLA ============ -->
+  <section id="angola" style="padding:30px 0 120px;">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); position:relative; border-radius:24px; overflow:hidden; min-height:440px; display:flex; align-items:flex-end; border:1px solid rgba(255,255,255,.10);">
+        <img src="images/08-angola-luanda.jpg" alt="Luanda ao pôr-do-sol" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"/>
+        <div style="position:absolute; inset:0; background:linear-gradient(0deg,rgba(7,12,31,.94),rgba(7,12,31,.2) 55%,transparent);"></div>
+        <div style="position:relative; z-index:2; padding:46px; max-width:640px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:14px;">Feito para Angola</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.6vw,40px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Perto do mercado, da moeda e do regulador</h2>
+          <p style="font-size:17px; color:#C2CEE6; margin-top:12px;">Kwanza, províncias, prazos legais e o enquadramento da ARSEG fazem parte do sistema — e está pronto para crescer para outros mercados.</p>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; margin-top:50px;">
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); position:relative; border-radius:20px; overflow:hidden; aspect-ratio:16/11; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
+          <img src="images/08b-pessoas.jpg" alt="Pessoas que o SIRIS protege" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
+        </div>
+        <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1) .1s,transform .7s cubic-bezier(.2,.7,.2,1) .1s;">
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.6vw,40px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Para as pessoas reais que protege</h2>
+          <p style="font-size:18px; color:#93A2C2; max-width:50ch; margin-top:18px;">Do condutor ao comerciante, da família à empresa — tornar o seguro simples, justo e transparente para quem mais precisa dele.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RAMOS & CAPACIDADES ============ -->
+  <section style="padding:30px 0 120px; position:relative; background:radial-gradient(1000px 460px at 50% 0%, rgba(31,166,121,.08), transparent 70%);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); text-align:center; max-width:720px; margin:0 auto 48px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:18px;">Tudo num só lugar</div>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Ramos &amp; capacidades</h2>
+      </div>
+      <div data-tiltgroup style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1); background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l1.8-4.6A2.2 2.2 0 0 1 6.9 7h10.2a2.2 2.2 0 0 1 2.1 1.4L21 13"/><path d="M4 13h16v4.5a.8.8 0 0 1-.8.8h-1.6a.8.8 0 0 1-.8-.8V16.5H7.2v1a.8.8 0 0 1-.8.8H4.8a.8.8 0 0 1-.8-.8z"/><path d="M7 16.5h.01M17 16.5h.01"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Automóvel</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Tarifação e gestão</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .04s,transform .5s cubic-bezier(.2,.7,.2,1) .04s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20C5 15.5 3 12 3 8.8 3 6.1 5.1 4 7.7 4c1.6 0 3.1.8 4.3 2.3C13.2 4.8 14.7 4 16.3 4 18.9 4 21 6.1 21 8.8c0 .8-.13 1.6-.42 2.4"/><path d="M3.5 12.5h4l1.5-2.5 2.5 5 1.5-3h4"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Vida &amp; Saúde</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Scoring e underwriting</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .08s,transform .5s cubic-bezier(.2,.7,.2,1) .08s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6 8 6"/><path d="M6 9.5V19h12V9.5"/><path d="M10 19v-5h4v5"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Multirriscos</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Habitação e comércio</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .12s,transform .5s cubic-bezier(.2,.7,.2,1) .12s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 15.5h5M9.5 9.5h2"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Apólices</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Ciclo de vida</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .16s,transform .5s cubic-bezier(.2,.7,.2,1) .16s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.7-7 9-4-1.3-7-4.4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Sinistros</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Validação e perícia</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1); background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.6M12 18.4V21M3 12h2.6M18.4 12H21M5.5 5.5l1.85 1.85M16.65 16.65L18.5 18.5M18.5 5.5l-1.85 1.85M7.35 16.65L5.5 18.5"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Motor de regras</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Decisões claras</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .04s,transform .5s cubic-bezier(.2,.7,.2,1) .04s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9.5 3v2M14.5 3v2M9.5 19v2M14.5 19v2M3 9.5h2M3 14.5h2M19 9.5h2M19 14.5h2"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">IA</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Agentes e assistente</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .08s,transform .5s cubic-bezier(.2,.7,.2,1) .08s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2.2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Segurança</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Soberania de dados</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .12s,transform .5s cubic-bezier(.2,.7,.2,1) .12s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M8 16v-3M12 16V9M16 16v-6"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Analítica</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">BI e atuariado</p></div>
+        <div data-reveal style="opacity:0; transform:translateY(20px); transition:opacity .5s cubic-bezier(.2,.7,.2,1) .16s,transform .5s cubic-bezier(.2,.7,.2,1) .16s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:20px; text-align:center;"><div style="width:58px; height:58px; margin:0 auto 14px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(150deg,rgba(95,192,255,.13),rgba(43,185,138,.10)); border:1px solid rgba(95,192,255,.20);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#5FC0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.6 2H4.4z"/><path d="M9.8 19.5a2.2 2.2 0 0 0 4.4 0"/></svg></div><h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:15px; color:#fff;">Notificações</h3><p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#7E8FB2; margin-top:4px;">Multicanal</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section style="padding:30px 0 120px;">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
+      <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); position:relative; border-radius:26px; overflow:hidden; border:1px solid rgba(95,192,255,.22); background:linear-gradient(135deg,#0E1A30,#0B1322); padding:72px 56px; text-align:center;">
+        <div style="position:absolute; width:520px; height:520px; border-radius:50%; filter:blur(90px); opacity:.4; background:radial-gradient(circle,#1769A6,transparent 65%); top:-220px; left:-120px;"></div>
+        <div style="position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(90px); opacity:.34; background:radial-gradient(circle,#1FA679,transparent 65%); bottom:-200px; right:-100px;"></div>
+        <div style="position:relative; z-index:2;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; color:#5FC0FF; text-transform:uppercase; margin-bottom:18px;">Vamos conversar</div>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,4.4vw,52px); line-height:1.06; letter-spacing:-.025em; color:#fff; max-width:18ch; margin:0 auto;">Pronto para conhecer o SIRIS de perto?</h2>
+          <p style="font-size:18px; color:#A9B7D4; max-width:54ch; margin:18px auto 0;">Mostramos a plataforma a funcionar — motor de regras, agentes de IA e soberania de dados, do início ao fim.</p>
+          <div style="margin-top:36px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+            <a href="#top" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; color:#0A0F1E; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:15px 30px; border-radius:12px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-2px); box-shadow:0 16px 36px rgba(43,185,138,.4);">Pedir uma demonstração</a>
+            <a href="#sobre" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:15px; color:#fff; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); padding:15px 30px; border-radius:12px; text-decoration:none; transition:background .2s ease, border-color .2s ease;" style-hover="background:rgba(255,255,255,.1); border-color:rgba(95,192,255,.4);">Rever a plataforma</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#070B17; border-top:1px solid rgba(255,255,255,.07); padding:64px 0 32px;">
+    <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
+      <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:34px;">
+        <div>
+          <a href="#top" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+            <svg viewBox="0 0 120 80" width="36" height="24" style="display:block;"><defs><linearGradient id="footlogo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5FC0FF"/><stop offset="1" stop-color="#2BB98A"/></linearGradient></defs><path d="M16 64 a44 44 0 0 1 88 0" fill="none" stroke="url(#footlogo)" stroke-width="9" stroke-linecap="round"/><path d="M34 64 a26 26 0 0 1 52 0" fill="none" stroke="#5FC0FF" stroke-width="8" stroke-linecap="round" opacity=".45"/><circle cx="60" cy="64" r="8" fill="#2BB98A"/></svg>
+            <span style="display:flex; align-items:center;"><span style="font-family:'JetBrains Mono',monospace; font-weight:600; font-size:22px; color:#fff; line-height:1;">siris</span><span style="width:7px; height:18px; background:#2BB98A; margin-left:4px; border-radius:1px;"></span></span>
+          </a>
+          <p style="font-size:14.5px; color:#93A2C2; margin-top:16px; max-width:42ch;">Plataforma de seguros com motor de regras, inteligência artificial e soberania de dados — desenhada para Angola.</p>
+        </div>
+        <div>
+          <h4 style="font-family:'JetBrains Mono',monospace; color:#fff; font-size:11px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:14px;">Plataforma</h4>
+          <a href="#sobre" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">O que é</a>
+          <a href="#como" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">Como funciona</a>
+          <a href="#ia" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">Inteligência artificial</a>
+          <a href="#seguranca" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">Segurança</a>
+        </div>
+        <div>
+          <h4 style="font-family:'JetBrains Mono',monospace; color:#fff; font-size:11px; letter-spacing:.18em; text-transform:uppercase; margin-bottom:14px;">SIRIS</h4>
+          <a href="#angola" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">Angola</a>
+          <a href="#" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">Conformidade ARSEG</a>
+          <a href="#" style="display:block; color:#93A2C2; font-size:14px; padding:5px 0; text-decoration:none;">Contacto</a>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.07); margin-top:38px; padding-top:20px; font-family:'JetBrains Mono',monospace; font-size:12px; color:#5b6b8c; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <span>© 2026 SIRIS · Sistema de Seguros — Angola</span>
+        <span>Página informativa · sem fins comerciais</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const prog = this.progEl;
+    const heroImg = document.querySelector('[data-hero-img]');
+    const onScroll = () => {
+      const h = document.documentElement;
+      const denom = (h.scrollHeight - h.clientHeight) || 1;
+      const p = h.scrollTop / denom;
+      if (prog) prog.style.width = (p * 100) + '%';
+      if (heroImg && !reduce && h.scrollTop < window.innerHeight) {
+        heroImg.style.transform = 'translateY(' + (h.scrollTop * 0.14) + 'px)';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // hero intro — via CSS @keyframes heroIn (sobrevive a re-renders do React)
+
+    // constelação de partículas no hero
+    const cv = document.querySelector('[data-hero-canvas]');
+    if (cv && !reduce) {
+      const ctx = cv.getContext('2d');
+      let w, h, parts, raf, running = false;
+      const size = () => {
+        w = cv.width = cv.offsetWidth; h = cv.height = cv.offsetHeight;
+        const n = Math.min(64, Math.floor(w * h / 19000));
+        parts = Array.from({ length: n }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.28, vy: (Math.random() - 0.5) * 0.28,
+          r: Math.random() * 1.4 + 0.5,
+        }));
+      };
+      const draw = () => {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of parts) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7);
+          ctx.fillStyle = 'rgba(150,205,255,.55)'; ctx.fill();
+        }
+        for (let i = 0; i < parts.length; i++) {
+          for (let j = i + 1; j < parts.length; j++) {
+            const a = parts[i], b = parts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+            if (d < 132) {
+              ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+              const o = (1 - d / 132) * 0.22;
+              ctx.strokeStyle = 'rgba(43,185,138,' + o + ')'; ctx.lineWidth = 1; ctx.stroke();
+            }
+          }
+        }
+        if (running) raf = requestAnimationFrame(draw);
+      };
+      const start = () => { if (!running) { running = true; draw(); } };
+      const stop = () => { running = false; cancelAnimationFrame(raf); };
+      window.addEventListener('resize', size);
+      size();
+      const hero = cv.parentElement;
+      new IntersectionObserver((es) => { es[0].isIntersecting ? start() : stop(); }).observe(hero);
+      start();
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = 1;
+          e.target.style.transform = 'none';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+    const animateCount = (el) => {
+      const t = parseFloat(el.dataset.count);
+      const dec = parseInt(el.dataset.dec || '0');
+      let s = null;
+      const dur = 1400;
+      const step = (ts) => {
+        if (!s) s = ts;
+        const p = Math.min((ts - s) / dur, 1);
+        el.textContent = (t * (0.2 + 0.8 * p * p)).toFixed(dec);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = t.toFixed(dec);
+      };
+      requestAnimationFrame(step);
+    };
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          if (!reduce) animateCount(e.target);
+          else e.target.textContent = e.target.dataset.count;
+          cio.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach((el) => cio.observe(el));
+
+    // tilt 3D + spotlight nos cartões
+    if (!reduce) {
+      document.querySelectorAll('[data-tiltgroup] > div').forEach((card) => {
+        card.style.isolation = 'isolate';
+        card.style.transition = 'transform .25s ease, border-color .25s ease, box-shadow .25s ease';
+        if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
+        const glow = document.createElement('div');
+        glow.style.cssText = 'position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0; transition:opacity .3s ease; z-index:-1; background:radial-gradient(220px circle at 50% 0%, rgba(95,192,255,.18), transparent 60%);';
+        card.appendChild(glow);
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+          const rx = (py - 0.5) * -5;
+          const ry = (px - 0.5) * 5;
+          card.style.transform = 'perspective(820px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-4px)';
+          glow.style.background = 'radial-gradient(240px circle at ' + (px * 100) + '% ' + (py * 100) + '%, rgba(95,192,255,.2), transparent 55%)';
+          glow.style.opacity = 1;
+          card.style.borderColor = 'rgba(95,192,255,.42)';
+          card.style.boxShadow = '0 20px 50px rgba(0,0,0,.45)';
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = 'none';
+          glow.style.opacity = 0;
+          card.style.borderColor = '';
+          card.style.boxShadow = '';
+        });
+      });
+    }
+  }
+
+  renderVals() {
+    return {
+      onImgError: (e) => { e.target.style.opacity = 0; },
+      progRef: (el) => { this.progEl = el; },
+    };
+  }
+}
+</script>
+</body>
+</html>
