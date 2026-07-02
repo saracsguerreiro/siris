@@ -30,51 +30,6 @@
   @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
 
   /* ===== LIGHT MODE ===== */
-  .icon-moon{ display:none; }
-  body.light .icon-sun{ display:none; }
-  body.light .icon-moon{ display:block; }
-
-  body.light{ background:#F0F5FF; }
-  body.light [data-screen-label="SIRIS Landing"]{ background:#F0F5FF !important; color:#0A1535 !important; }
-
-  body.light nav{ background:rgba(236,242,255,.93) !important; border-bottom-color:rgba(0,20,80,.12) !important; }
-  body.light nav [style*="color:#93A2C2"]{ color:#3A5080 !important; }
-  body.light nav [style*="color:#fff"]{ color:#0A1535 !important; }
-  body.light nav a:hover{ color:#0A1535 !important; }
-  body.light [data-theme-btn]{ background:rgba(0,20,80,.05) !important; border-color:rgba(0,20,80,.16) !important; }
-  body.light [data-theme-btn] svg{ color:#3A5080 !important; }
-
-  body.light section h2,body.light section h3{ color:#0A1535 !important; }
-  body.light section p{ color:#3A5080 !important; }
-  body.light section [style*="color:#93A2C2"]{ color:#3A5080 !important; }
-  body.light section [style*="color:#C2CEE6"]{ color:#2B3D6A !important; }
-  body.light section [style*="color:#8595B6"]{ color:#5868A0 !important; }
-  body.light section [style*="color:#A9B7D4"]{ color:#3A5080 !important; }
-  body.light section [style*="color:#fff"]:not(a),:is(body.light section) span[style*="color:#fff"]{ color:#0A1535 !important; }
-
-  body.light [style*="rgba(43,185,138,.12)"]{ color:#12432E !important; }
-
-  body.light [data-tiltgroup]>div{ background:rgba(255,255,255,.88) !important; border-color:rgba(0,30,130,.09) !important; }
-  body.light [data-tiltgroup]>div h3{ color:#0A1535 !important; }
-  body.light [data-tiltgroup]>div [style*="color:#7E8FB2"],
-  body.light [data-tiltgroup]>div [style*="color:#8595B6"]{ color:#5868A0 !important; }
-
-  body.light [style*="repeating-linear-gradient(135deg,#13203A"]{ background:repeating-linear-gradient(135deg,#D5E2FF,#D5E2FF 14px,#C3D3F5 14px,#C3D3F5 28px) !important; border-color:rgba(0,30,120,.12) !important; }
-
-  body.light [style*="linear-gradient(135deg,#0E1A30"]{ background:linear-gradient(135deg,#E2EEFF,#ECF5FF) !important; border-color:rgba(95,192,255,.4) !important; }
-  body.light [style*="linear-gradient(135deg,#0E1A30"] h2{ color:#0A1535 !important; }
-  body.light [style*="linear-gradient(135deg,#0E1A30"] p{ color:#3A5080 !important; }
-  body.light [style*="linear-gradient(135deg,#0E1A30"] [style*="color:#5FC0FF"]{ color:#2070B0 !important; }
-  body.light [style*="linear-gradient(135deg,#0E1A30"] [style*="color:#A9B7D4"]{ color:#3A5080 !important; }
-  body.light [style*="linear-gradient(135deg,#0E1A30"] a[style*="color:#fff"]{ color:#0A1535 !important; background:rgba(0,20,80,.07) !important; border-color:rgba(0,20,80,.2) !important; }
-
-  body.light footer{ background:#D8E6FA !important; border-top-color:rgba(0,20,80,.12) !important; }
-  body.light footer h4{ color:#0A1535 !important; }
-  body.light footer p{ color:#3A5080 !important; }
-  body.light footer a{ color:#3A5080 !important; }
-  body.light footer [style*="color:#93A2C2"]{ color:#3A5080 !important; }
-  body.light footer [style*="color:#5b6b8c"]{ color:#6878A8 !important; }
-  body.light footer [style*="color:#fff"]{ color:#0A1535 !important; }
 </style>
 </helmet>
 
@@ -97,10 +52,6 @@
         <a href="#angola" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Angola</a>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
-        <button data-theme-btn onclick="{{ onThemeToggle }}" style="width:36px; height:36px; border:1px solid rgba(255,255,255,.14); border-radius:50%; background:rgba(255,255,255,.06); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background .2s, border-color .2s; flex-shrink:0; outline:none;">
-          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#93A2C2;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#3A5080;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
         <a href="#sobre" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#0A0F1E; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:10px 18px; border-radius:10px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-2px); box-shadow:0 12px 28px rgba(43,185,138,.35);">Conhecer →</a>
       </div>
     </div>
@@ -355,9 +306,6 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   componentDidMount() {
-    const saved = localStorage.getItem('siris-theme');
-    if (saved === 'light') document.body.classList.add('light');
-
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const prog = this.progEl;
@@ -491,11 +439,6 @@ class Component extends DCLogic {
     return {
       onImgError: (e) => { e.target.style.opacity = 0; },
       progRef: (el) => { this.progEl = el; },
-      onThemeToggle: () => {
-        const next = !document.body.classList.contains('light');
-        document.body.classList.toggle('light', next);
-        localStorage.setItem('siris-theme', next ? 'light' : 'dark');
-      },
     };
   }
 }
