@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +32,31 @@
   nav a[data-nav-link]{ position:relative; }
   nav a[data-nav-link].nav-active{ color:#fff !important; }
   nav a[data-nav-link].nav-active::after{ content:''; position:absolute; bottom:-22px; left:0; right:0; height:2px; background:linear-gradient(100deg,#5FC0FF,#2BB98A); border-radius:2px; }
+
+  /* step flow arrows */
+  .step-arrow{ display:flex; align-items:center; justify-content:center; flex-shrink:0; width:24px; color:rgba(95,192,255,.45); }
+  [data-tiltgroup][data-steps]{ display:flex !important; align-items:stretch; gap:10px !important; }
+  [data-tiltgroup][data-steps] > div{ flex:1; min-width:0; }
+
+  /* mobile nav */
+  .nav-hamburger{ display:none; width:36px; height:36px; background:none; border:1px solid rgba(255,255,255,.14); border-radius:10px; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; padding:0; }
+  .nav-hamburger span{ display:block; width:18px; height:1.5px; background:#C2CEE6; border-radius:2px; transition:transform .25s, opacity .25s; }
+  .nav-mobile-menu{ display:none; position:fixed; inset:0; z-index:58; background:rgba(7,11,23,.97); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:28px; }
+  .nav-mobile-menu.open{ display:flex; }
+  .nav-mobile-menu a{ font-family:'Hanken Grotesk'; font-weight:600; font-size:22px; color:#C2CEE6; text-decoration:none; transition:color .2s; }
+  .nav-mobile-menu a:hover{ color:#fff; }
+  .nav-mobile-menu .m-cta{ color:#0A0F1E !important; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:14px 36px; border-radius:12px; margin-top:8px; font-size:17px; }
+  @media(max-width:768px){
+    .nav-desktop-links{ display:none !important; }
+    .nav-cta{ display:none !important; }
+    .nav-hamburger{ display:flex !important; }
+    .step-arrow{ display:none !important; }
+    [data-tiltgroup][data-steps]{ flex-direction:column !important; }
+  }
+
+  /* back to top */
+  #back-top{ position:fixed; bottom:28px; right:28px; z-index:55; width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#5FC0FF,#2BB98A); display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; opacity:0; transform:translateY(10px); transition:opacity .3s,transform .3s; pointer-events:none; box-shadow:0 8px 24px rgba(43,185,138,.35); }
+  #back-top.visible{ opacity:1; transform:none; pointer-events:auto; }
 </style>
 </helmet>
 
@@ -46,18 +71,32 @@
         <svg viewBox="0 0 120 80" width="34" height="23" style="display:block;"><defs><linearGradient id="navlogo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5FC0FF"/><stop offset="1" stop-color="#2BB98A"/></linearGradient></defs><path d="M16 64 a44 44 0 0 1 88 0" fill="none" stroke="url(#navlogo)" stroke-width="9" stroke-linecap="round"/><path d="M34 64 a26 26 0 0 1 52 0" fill="none" stroke="#5FC0FF" stroke-width="8" stroke-linecap="round" opacity=".45"/><circle cx="60" cy="64" r="8" fill="#2BB98A"/></svg>
         <span style="display:flex; align-items:center;"><span style="font-family:'JetBrains Mono',monospace; font-weight:600; font-size:21px; color:#fff; line-height:1;">siris</span><span style="width:7px; height:17px; background:#2BB98A; margin-left:4px; border-radius:1px; animation:blink 1.1s steps(1) infinite;"></span></span>
       </a>
-      <div style="display:flex; gap:30px; font-family:'Hanken Grotesk'; font-weight:600; font-size:14.5px; color:#C2CEE6;">
+      <div class="nav-desktop-links" style="display:flex; gap:22px; font-family:'Hanken Grotesk'; font-weight:600; font-size:14.5px; color:#C2CEE6;">
         <a href="#sobre" data-nav-link="sobre" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">O que é</a>
         <a href="#como" data-nav-link="como" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Como funciona</a>
+        <a href="#regras" data-nav-link="regras" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Regras</a>
         <a href="#ia" data-nav-link="ia" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">IA</a>
         <a href="#seguranca" data-nav-link="seguranca" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Segurança</a>
         <a href="#angola" data-nav-link="angola" style="color:inherit; text-decoration:none; transition:color .2s ease;" style-hover="color:#ffffff;">Angola</a>
       </div>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <a href="#sobre" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#0A0F1E; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:10px 18px; border-radius:10px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-2px); box-shadow:0 12px 28px rgba(43,185,138,.35);">Conhecer →</a>
+      <div class="nav-cta" style="display:flex; align-items:center; gap:10px;">
+        <a href="#demo" style="font-family:'Hanken Grotesk'; font-weight:600; font-size:14px; color:#0A0F1E; background:linear-gradient(100deg,#5FC0FF,#2BB98A); padding:10px 18px; border-radius:10px; text-decoration:none; transition:transform .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-2px); box-shadow:0 12px 28px rgba(43,185,138,.35);">Conhecer →</a>
       </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav-mobile-menu" id="nav-mobile-menu">
+    <a href="#sobre" class="m-link">O que é</a>
+    <a href="#como" class="m-link">Como funciona</a>
+    <a href="#regras" class="m-link">Regras</a>
+    <a href="#ia" class="m-link">IA</a>
+    <a href="#seguranca" class="m-link">Segurança</a>
+    <a href="#angola" class="m-link">Angola</a>
+    <a href="#demo" class="m-cta">Pedir demonstração</a>
+  </div>
 
   <!-- ============ HERO ============ -->
   <header id="top" style="position:relative; min-height:96vh; display:flex; align-items:center; overflow:hidden; padding-top:70px;">
@@ -105,6 +144,8 @@
     </div>
   </section>
 
+  <div style="height:1px; max-width:900px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(95,192,255,.15),rgba(95,192,255,.6),rgba(43,185,138,.6),rgba(43,185,138,.15),transparent); background-size:200% 100%; animation:flowx 5s linear infinite;"></div>
+
   <!-- ============ COMO FUNCIONA ============ -->
   <section id="como" style="padding:30px 0 120px; position:relative; background:radial-gradient(1000px 460px at 50% 0%, rgba(23,105,166,.09), transparent 70%);">
     <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
@@ -113,22 +154,25 @@
         <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4vw,44px); line-height:1.1; letter-spacing:-.02em; color:#fff;">Da informação à decisão, em <span style="background:linear-gradient(100deg,#5FC0FF,#2BB98A); -webkit-background-clip:text; background-clip:text; color:transparent;">segundos</span></h2>
         <p style="font-size:18px; color:#93A2C2; margin:16px auto 0; max-width:60ch;">Dados que fluem por etapas claras, cada uma auditável e explicável, até uma decisão consistente em todos os canais.</p>
       </div>
-      <div data-tiltgroup style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:48px;">
+      <div data-tiltgroup data-steps style="margin-top:48px;">
         <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1); background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
           <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">01</div>
           <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Recolha</h3>
           <p style="font-size:14px; color:#8595B6; margin-top:6px;">Portal, app ou backoffice submetem os dados.</p>
         </div>
+        <span class="step-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
         <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1) .08s,transform .6s cubic-bezier(.2,.7,.2,1) .08s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
           <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">02</div>
           <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Avaliação</h3>
           <p style="font-size:14px; color:#8595B6; margin-top:6px;">O motor de regras analisa risco, elegibilidade e tarifa.</p>
         </div>
+        <span class="step-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
         <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1) .16s,transform .6s cubic-bezier(.2,.7,.2,1) .16s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
           <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">03</div>
           <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Decisão</h3>
           <p style="font-size:14px; color:#8595B6; margin-top:6px;">Aprovar, agravar ou rever — com o motivo registado.</p>
         </div>
+        <span class="step-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
         <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1) .24s,transform .6s cubic-bezier(.2,.7,.2,1) .24s; background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:26px;">
           <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#5FC0FF; margin-bottom:16px;">04</div>
           <h3 style="font-family:'Space Grotesk'; font-weight:600; font-size:17px; color:#fff;">Ação</h3>
@@ -143,7 +187,7 @@
   </section>
 
   <!-- ============ MOTOR DE REGRAS ============ -->
-  <section style="padding:30px 0 120px;">
+  <section id="regras" style="padding:30px 0 120px;">
     <div style="max-width:1200px; margin:0 auto; padding:0 32px; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
       <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1) .1s,transform .7s cubic-bezier(.2,.7,.2,1) .1s; order:2; position:relative; border-radius:20px; overflow:hidden; aspect-ratio:16/11; border:1px solid rgba(255,255,255,.10); background:repeating-linear-gradient(135deg,#13203A,#13203A 14px,#101B31 14px,#101B31 28px);">
         <img src="images/04-motor-regras.jpg" alt="Motor de regras" onerror="{{ onImgError }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92) contrast(1.05);"/><div style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(140deg,rgba(95,192,255,.16),transparent 46%,rgba(43,185,138,.16)); mix-blend-mode:soft-light;"></div><div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 64px 10px rgba(8,13,32,.5);"></div>
@@ -181,11 +225,13 @@
       </div>
       <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1); margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
         <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">Governança entre agentes (A2A)</span>
-        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">AI safety &amp; guardrails</span>
-        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">Human-in-the-loop</span>
+        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">Segurança e limites da IA</span>
+        <span style="font-family:'Hanken Grotesk'; font-weight:600; font-size:13.5px; color:#C2CEE6; padding:9px 16px; border-radius:999px; background:rgba(43,185,138,.12); border:1px solid rgba(43,185,138,.4);">Controlo humano nas decisões</span>
       </div>
     </div>
   </section>
+
+  <div style="height:1px; max-width:900px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(95,192,255,.15),rgba(95,192,255,.6),rgba(43,185,138,.6),rgba(43,185,138,.15),transparent); background-size:200% 100%; animation:flowx 5s linear infinite;"></div>
 
   <!-- ============ SEGURANÇA ============ -->
   <section id="seguranca" style="padding:30px 0 120px; position:relative; background:radial-gradient(900px 440px at 82% 12%, rgba(23,105,166,.10), transparent 70%);">
@@ -205,6 +251,8 @@
       </div>
     </div>
   </section>
+
+  <div style="height:1px; max-width:900px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(95,192,255,.15),rgba(95,192,255,.6),rgba(43,185,138,.6),rgba(43,185,138,.15),transparent); background-size:200% 100%; animation:flowx 5s linear infinite;"></div>
 
   <!-- ============ ANGOLA ============ -->
   <section id="angola" style="padding:30px 0 120px;">
@@ -230,6 +278,8 @@
     </div>
   </section>
 
+  <div style="height:1px; max-width:900px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(95,192,255,.15),rgba(95,192,255,.6),rgba(43,185,138,.6),rgba(43,185,138,.15),transparent); background-size:200% 100%; animation:flowx 5s linear infinite;"></div>
+
   <!-- ============ RAMOS & CAPACIDADES ============ -->
   <section style="padding:30px 0 120px; position:relative; background:radial-gradient(1000px 460px at 50% 0%, rgba(31,166,121,.08), transparent 70%);">
     <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
@@ -252,8 +302,10 @@
     </div>
   </section>
 
+  <div style="height:1px; max-width:900px; margin:0 auto; background:linear-gradient(90deg,transparent,rgba(95,192,255,.15),rgba(95,192,255,.6),rgba(43,185,138,.6),rgba(43,185,138,.15),transparent); background-size:200% 100%; animation:flowx 5s linear infinite;"></div>
+
   <!-- ============ CTA FINAL ============ -->
-  <section style="padding:30px 0 120px;">
+  <section id="demo" style="padding:30px 0 120px;">
     <div style="max-width:1200px; margin:0 auto; padding:0 32px;">
       <div data-reveal style="opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1); position:relative; border-radius:26px; overflow:hidden; border:1px solid rgba(95,192,255,.22); background:linear-gradient(135deg,#0E1A30,#0B1322); padding:72px 56px; text-align:center;">
         <div style="position:absolute; width:520px; height:520px; border-radius:50%; filter:blur(90px); opacity:.4; background:radial-gradient(circle,#1769A6,transparent 65%); top:-220px; left:-120px;"></div>
@@ -270,6 +322,10 @@
       </div>
     </div>
   </section>
+
+  <button id="back-top" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A0F1E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
 
   <!-- ============ FOOTER ============ -->
   <footer style="background:#070B17; border-top:1px solid rgba(255,255,255,.07); padding:64px 0 32px;">
@@ -405,6 +461,30 @@ class Component extends DCLogic {
       });
     }, { threshold: 0.6 });
     document.querySelectorAll('[data-count]').forEach((el) => cio.observe(el));
+
+    // hamburger mobile menu
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const open = mobileMenu.classList.toggle('open');
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      mobileMenu.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // back to top
+    const backTop = document.getElementById('back-top');
+    if (backTop) {
+      const onScrollTop = () => backTop.classList.toggle('visible', window.scrollY > 400);
+      window.addEventListener('scroll', onScrollTop, { passive: true });
+      onScrollTop();
+    }
 
     const navLinks = document.querySelectorAll('a[data-nav-link]');
     const setActive = (id) => {
